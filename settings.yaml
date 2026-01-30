@@ -1,0 +1,22 @@
+# AI Daily Brief Settings
+
+scraper:
+  delay_between_users: 2        # seconds between user fetches
+  max_tweets_per_user: 50       # max tweets to fetch per account
+  max_tweets_per_search: 20     # max tweets per search query
+  lookback_hours: 24            # only include tweets from last N hours
+
+summarizer:
+  model: "claude-sonnet-4-20250514"
+  max_input_tweets: 200         # top N tweets by engagement to send to Claude
+  max_stories: 15               # max stories in the brief
+  max_tokens: 4096              # max response tokens
+
+email:
+  sender: "rathinamurthy.ai@gmail.com"
+  recipients:
+    - "rathinamurthy.ai@gmail.com"
+    - "sridherj@gmail.com"
+  subject_prefix: "AI Daily Brief"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587

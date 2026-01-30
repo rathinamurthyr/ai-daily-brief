@@ -1,0 +1,31 @@
+name: Daily AI Brief
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 7:00 AM UTC daily
+  workflow_dispatch:        # Manual trigger
+
+jobs:
+  run-brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run daily brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TWITTER_COOKIES: ${{ secrets.TWITTER_COOKIES }}
+        run: python run.py
